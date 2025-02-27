@@ -86,19 +86,18 @@ public class DoublyLinkedList<T> {
     }
 
     public void removeLongs(int length) {
-        if (head.data instanceof String){
             if (head == null) {
                 System.out.println("A lista está vazia");
                 return;
             }
             Node<T> temp = head;
             while (temp != null) {
-                if (temp.data.length() <= length) {
+                if (temp.data.toString().length() <= length) {
                     removeCurrent(temp);
                 }
                 temp = temp.next;
             }
-        }
+        
         
     }
 }
