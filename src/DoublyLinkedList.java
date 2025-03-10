@@ -31,10 +31,12 @@ public class DoublyLinkedList<T> {
             System.out.println("A lista está vazia");
             return;
         }
+        int cout = 0;
         Node<T> current = head;
         while (current != null) {
-            System.out.println(current.data);
+            System.out.println("[" + cout + "] = " +current.data);
             current = current.next;
+            cout++;
         }
     }
 
@@ -48,6 +50,57 @@ public class DoublyLinkedList<T> {
             System.out.println(current.data);
             current = current.prev;
         }
+    }
+
+    public void deleteHead() {
+        if (head == null) {
+            System.out.println("A lista está vazia");
+            return;
+        }
+        if (head == tail){
+            head = null;
+            tail = null;
+            return;
+        }
+        Node<T> temp = head;
+        head = head.next;
+        temp.next = null;
+        head.prev = null;
+    }
+
+    public void insertAtIndex(int i, T data){
+        Node<T> newNode = new Node<T>(data);
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
+            return;
+        }
+
+        int cout = 0;
+        Node<T> temp = head;
+        while (cout != i){
+            temp = temp.next;
+            cout++;
+        }
+        newNode.next = temp;
+        newNode.prev = temp.prev;
+        temp.prev.next = newNode;
+        temp.prev = newNode;
+    }
+
+    public void removeAtIndex(int i){
+        if (head == null) {
+            System.out.println("A lista está vazia");
+            return;
+        }
+
+        int cout = 0;
+        Node<T> temp = head;
+        while (cout != i){
+            temp = temp.next;
+            cout++;
+        }
+        removeCurrent(temp);
     }
 
     public boolean removeAtValue(String data) {
@@ -97,7 +150,5 @@ public class DoublyLinkedList<T> {
                 }
                 temp = temp.next;
             }
-        
-        
     }
 }
